@@ -1,2 +1,31 @@
 ---
-# tasks file for ansible-user
+# Syntax:
+#
+# Roles:
+# - { role: user, users: [ 'username1', 'username2' ], groupname: mygroup, admin: true }
+#
+# To use this role in a 'bootstraping' playbook use this syntax:
+#
+# - include_role:
+#     name: user
+#   vars:
+#     users: [ 'username1', 'username2' ]
+#     groupname: mygroup
+#     admin: true
+#
+# The usernames are given by a list and the groupname is set. The variable
+# 'admin' defines if the group has sudoers rights.
+#
+
+- import_tasks: create_group.yml
+- import_tasks: create_user.yml
+- import_tasks: create_authorized_keys.yml
+- import_tasks: create_sudoers.yml
+
+# - include_role:
+#     name: base
+#     tasks_from: grml-config
+#   with_items:
+#     - "{{ users }}"
+#   loop_control:
+#     loop_var: username

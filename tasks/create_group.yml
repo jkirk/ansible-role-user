@@ -1,0 +1,6 @@
+---
+
+- name: "Create user group(s)"
+  group: name={{ item }} state=present
+  loop: "{{ user_groups }}"
+  when: user_groups

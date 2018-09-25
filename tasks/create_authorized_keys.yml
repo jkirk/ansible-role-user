@@ -1,0 +1,8 @@
+---
+
+- name: "Set authorized_key to allow SSH key based logins"
+  authorized_key:
+    user: "{{ item }}"
+    key: "{{ lookup('file', 'files/ssh/{{ item }}.pub') }}"
+  loop: "{{ user_names }}"
+  when: not ansible_check_mode

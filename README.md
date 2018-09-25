@@ -1,38 +1,67 @@
-Role Name
-=========
+user
+====
 
-A brief description of the role goes here.
+A simple ansible role to bootstrap user accounts with SSH key based logins and passwordless sudo.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+For each user with SSH key based login you need a public key file like this:
+
+`files/ssh/$USERNAME.pub`
+
+This file will then be deployed to `/home/$USERNAME/.ssh/authorized_keys`.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Use `group_vars/*` to deploy the users to specific host groups. If you want to deploy the users in all hosts use `group_vars/all`.
+
+
+```
+# The users you want to create.
+user_names: [ "jane_doe", "john_doe" ]
+
+# Optionally create additional user groups. If empty, the user you create will
+# automatically be a part of their user's group, ie. john_doe:john_doe.
+user_groups: []
+
+
+sudoers_groups: []
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+For this example we will assume you have defined a host group *servers* in `hosts`.
+
+In this example the users *jane_doe* and *john_doe* are created and will also be part of the group *sysadmin*.
+All users which are part of the *sysadmin* group will have passwordless sudo rights.
+
+
+`site.yml`:
+
+```
+---
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: jkirk.user, user_names: [ 'jane_doe' ], user_groups: [ 'sysadmin' ], sudoers_groups [ ' sysadmin' ] }
+```
+
+To run this playbook you would do `ansible-playbook -i hosts site.yml`
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Darshaka Pathirana - https://synpro.solutions

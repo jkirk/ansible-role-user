@@ -1,0 +1,10 @@
+---
+
+
+- name: "Create user(s)"
+  user:
+    name: "{{ item }}"
+    groups: "{{ (user_groups | join(',')) }}"
+    shell: "{{ user_shell }}"
+  loop: "{{ user_names }}"
+
