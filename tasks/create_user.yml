@@ -1,16 +1,11 @@
 ---
 
-
-- name: "Create user(s)"
-  user:
-    name: "{{ item }}"
-    shell: "{{ user_shell }}"
-  loop: "{{ user_names }}"
-
-- name: "Add user(s) to user_group(s)"
-  user:
-    name: "{{ item }}"
-    groups: "{{ (user_groups | join(',')) }}"
-    shell: "{{ user_shell }}"
-  loop: "{{ user_names }}"
-  when: user_groups is defined
+- name: Create group {{ item }}
+  group: name={{ item }} state=present
+  with_items: "{{ users }}"
+- name: Create user account for {{ item }}
+  user: name={{ item }} shell={{ user_shell | default('/bin/bash') }} group={{ item }}
+  with_items: "{{ users }}"
+- name: Create directory ssh directory for user {{ item }}
+  file: path=/home/{{ item }}/.ssh state=directory owner={{ item }} group={{ item }} mode=0755
+  with_items: "{{ users }}"

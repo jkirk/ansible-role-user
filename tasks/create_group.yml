@@ -1,6 +1,7 @@
 ---
 
-- name: "Create user group(s)"
-  group: name={{ item }} state=present
-  loop: "{{ user_groups }}"
-  when: user_groups is defined
+- name: Create group {{ groupname }}
+  group: name={{ groupname }} state=present
+- name: Put users in group {{ groupname }}
+  user: name={{ item }} groups={{ groupname }} append=yes
+  with_items: "{{ users }}"

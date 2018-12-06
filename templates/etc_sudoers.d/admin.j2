@@ -1,3 +1,4 @@
 # HEADER: managed by ansible, do NOT edit manually!
-
-%{{ item }} ALL=NOPASSWD: ALL
+{% for username in users %}
+{{ username }} ALL=NOPASSWD: ALL
+{% endfor %}
