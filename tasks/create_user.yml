@@ -4,7 +4,13 @@
 - name: "Create user(s)"
   user:
     name: "{{ item }}"
-    groups: "{{ (user_groups | join(',')) }}"
     shell: "{{ user_shell }}"
   loop: "{{ user_names }}"
 
+- name: "Add user(s) to user_group(s)"
+  user:
+    name: "{{ item }}"
+    groups: "{{ (user_groups | join(',')) }}"
+    shell: "{{ user_shell }}"
+  loop: "{{ user_names }}"
+  when: user_groups is defined

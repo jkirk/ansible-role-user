@@ -3,4 +3,4 @@
 - name: "Install sudoers file for group {{ item }}"
   template: src=templates/etc_sudoers.d/admin.j2 dest=/etc/sudoers.d/{{ item }} owner=root group=root mode=0440
   loop: "{{ sudoers_groups }}"
-  when: sudoers_groups
+  when: sudoers_groups is defined
