@@ -7,5 +7,5 @@
   user: name={{ item }} shell={{ user_shell | default('/bin/bash') }} group={{ item }}
   with_items: "{{ users }}"
 - name: Create directory ssh directory for user {{ item }}
-  file: path=/home/{{ item }}/.ssh state=directory owner={{ item }} group={{ item }} mode=0755
+  file: path=/home/{{ item }}/.ssh state=directory owner={{ item }} group={{ item }} mode=0700
   with_items: "{{ users }}"
