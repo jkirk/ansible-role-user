@@ -3,7 +3,7 @@ user
 
 A simple ansible role to bootstrap user accounts with SSH key based logins and passwordless sudo.
 
-For something more sophisticated use a different role, the ansible-galaxy role (robertdebock.users)[https://galaxy.ansible.com/robertdebock/users] looks promising.
+For something more sophisticated use a different role, the ansible-galaxy role [robertdebock.users](https://galaxy.ansible.com/robertdebock/users) looks promising.
 
 Requirements
 ------------
@@ -36,14 +36,14 @@ Dependencies
 
 None.
 
-Example Playbook
-----------------
+Example Playbooks
+-----------------
 
 For this example we will assume you have defined a host group *servers* in `hosts`.
 
 In this example the users *jane_doe* and *john_doe* are created, will also be part of the group *sysadmin* and will have passwordless sudo rights.
 
-`site.yml`:
+`site.yml`
 
 ```
 ---
@@ -53,7 +53,28 @@ In this example the users *jane_doe* and *john_doe* are created, will also be pa
          - { role: jkirk.user, users: [ 'jane_doe', 'john_doe' ], groupname: 'sysadmin', admin: True }
 ```
 
-To run this playbook you would do `ansible-playbook -i hosts site.yml`
+It makes sense to put the user role in a bootstrap-playbook like this:
+
+`boostrap.yml`
+
+```
+---
+# This playbook prepares the system to be managed by Ansible.
+#
+# Example:
+#
+#   ansible-playbook -u root bootstrap.yml
+
+- name: Prepare system to be managed by Ansible
+  hosts: all
+  become: false
+  gather_facts: false
+  roles:
+    - robertdebock.bootstrap
+    - { role: jkirk.user, users: [ 'jane_doe', 'john_doe' ], groupname: 'sysadmin', admin: True }
+```
+
+To run this playbook you would do `ansible-playbook -u root -i hosts site.yml`
 
 License
 -------
