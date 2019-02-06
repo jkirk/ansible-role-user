@@ -24,6 +24,11 @@ Use `group_vars/*` to deploy the users to specific host groups.
 # The users you want to create.
 users: [ "jane_doe", "john_doe" ]
 
+# Set the default shell for new and existing users.
+# If user_shell is omitted the default shell of existing users is not changed and
+# the default system shell is used for new users.
+user_shell: '/bin/zsh'
+
 # Create additional user groups. The user you create will
 # automatically be a part of their user's group, ie. john_doe:john_doe.
 #
