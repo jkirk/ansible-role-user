@@ -19,5 +19,6 @@
 
 - import_tasks: create_user.yml
 - import_tasks: create_group.yml
+  when: groupname is defined
 - import_tasks: install_authorized_keys.yml
 - import_tasks: create_sudoers.yml

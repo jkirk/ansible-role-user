@@ -1,7 +1,7 @@
 user
 ====
 
-A simple ansible role to bootstrap user accounts with SSH key based logins and passwordless sudo.
+A simple ansible role to bootstrap user accounts with SSH public key based logins and passwordless sudo.
 
 For something more sophisticated use a different role, the ansible-galaxy role [robertdebock.users](https://galaxy.ansible.com/robertdebock/users) looks promising.
 
@@ -17,19 +17,24 @@ This file will then be deployed to `/home/$USERNAME/.ssh/authorized_keys`.
 Role Variables
 --------------
 
-Use `group_vars/*` to deploy the users to specific host groups. If you want to deploy the users on all hosts use `group_vars/all`.
+Use `group_vars/*` to deploy the users to specific host groups.
 
 
-```
+```yaml
 # The users you want to create.
 users: [ "jane_doe", "john_doe" ]
 
 # Create additional user groups. The user you create will
 # automatically be a part of their user's group, ie. john_doe:john_doe.
+#
+# groupname is mandatory when admin is true.
 groupname: 'sysadmin'
 
-admin: True
+# Setup passwordless sudo for the given groupname.
+admin: true
 ```
+
+If you want to deploy the users on all hosts you can use `group_vars/all` or pass it as parameters to role (see example below).
 
 Dependencies
 ------------
@@ -45,19 +50,19 @@ In this example the users *jane_doe* and *john_doe* are created, will also be pa
 
 `site.yml`
 
-```
+```yaml
 ---
 
-    - hosts: servers
-      roles:
-         - { role: jkirk.user, users: [ 'jane_doe', 'john_doe' ], groupname: 'sysadmin', admin: True }
+- hosts: servers
+  roles:
+     - { role: jkirk.user, users: [ 'jane_doe', 'john_doe' ], groupname: 'sysadmin', admin: true }
 ```
 
 It makes sense to put the user role in a bootstrap-playbook like this:
 
 `boostrap.yml`
 
-```
+```yaml
 ---
 # This playbook prepares the system to be managed by Ansible.
 #
