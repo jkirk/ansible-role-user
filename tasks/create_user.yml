@@ -2,10 +2,10 @@
 
 - name: Create user group {{ item }}
   group: name={{ item }} state=present
-  with_items: "{{ users }}"
 - name: Create user account for {{ item }}
-  user: name={{ item }} shell={{ user_shell }} group={{ item }}
-  with_items: "{{ users }}"
+  user: name={{ item }} group={{ item }}
+- name: Set shell for user {{ item }}
+  user: name={{ item }} shell={{ user_shell }}
+  when: user_shell is defined
 - name: Create directory ssh directory for user {{ item }}
   file: path=/home/{{ item }}/.ssh state=directory owner={{ item }} group={{ item }} mode=0700
-  with_items: "{{ users }}"

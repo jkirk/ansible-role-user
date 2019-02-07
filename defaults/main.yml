@@ -1,3 +1,2 @@
 ---
-
-user_shell: "/bin/bash"
+# defaults file for ansible-user

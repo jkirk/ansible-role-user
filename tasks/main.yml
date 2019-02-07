@@ -17,7 +17,8 @@
 # 'admin' defines if the group has sudoers rights.
 #
 
-- import_tasks: create_user.yml
+- include_tasks: create_user.yml
+  with_items: "{{ users }}"
 - import_tasks: create_group.yml
   when: groupname is defined
 - import_tasks: install_authorized_keys.yml
