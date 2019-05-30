@@ -1,5 +1,5 @@
 ---
 
-- name: Install sudoers file for group {{ groupname }}
+- name: "Install sudoers file for group {{ groupname }}"
   template: src=templates/etc_sudoers.d/admin.j2 dest=/etc/sudoers.d/{{ groupname }} owner=root group=root mode=0440
   when: admin

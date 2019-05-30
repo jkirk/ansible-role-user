@@ -1,7 +1,7 @@
 ---
 
-- name: Create group {{ groupname }}
+- name: "Create group {{ groupname }}"
   group: name={{ groupname }} state=present
-- name: Put users in group {{ groupname }}
+- name: "Put users in group {{ groupname }}"
   user: name={{ item }} groups={{ groupname }} append=yes
   with_items: "{{ users }}"

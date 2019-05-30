@@ -1,5 +1,5 @@
 ---
 
-- name: Install authorized_keys file for user {{ item }}
+- name: "Install authorized_keys file for user {{ item }}"
   copy: src=files/ssh/{{ item }}.pub dest=/home/{{ item }}/.ssh/authorized_keys owner={{ item }} group={{ item }} mode=0644
   with_items: "{{ users }}"

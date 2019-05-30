@@ -1,11 +1,11 @@
 ---
 
-- name: Create user group {{ item }}
+- name: "Create user group {{ item }}"
   group: name={{ item }} state=present
-- name: Create user account for {{ item }}
+- name: "Create user account for {{ item }}"
   user: name={{ item }} group={{ item }}
-- name: Set shell for user {{ item }}
+- name: "Set shell for user {{ item }}"
   user: name={{ item }} shell={{ user_shell }}
   when: user_shell is defined
-- name: Create directory ssh directory for user {{ item }}
+- name: "Create directory ssh directory for user {{ item }}"
   file: path=/home/{{ item }}/.ssh state=directory owner={{ item }} group={{ item }} mode=0700
