@@ -65,7 +65,7 @@ In this example the users *jane_doe* and *john_doe* are created, will also be pa
 
 It makes sense to put the user role in a bootstrap-playbook like this:
 
-`boostrap.yml`
+`bootstrap.yml`
 
 ```yaml
 ---

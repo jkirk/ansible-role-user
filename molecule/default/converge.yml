@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible-role-user"
+      include_role:
+        name: "ansible-role-user"
+      vars:
+        users: [ 'sysadmin' ]
+        groupname: 'sysadmin'
+        admin: True

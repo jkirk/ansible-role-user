@@ -1,6 +1,0 @@
----
-- name: Converge
-  hosts: all
-  roles:
-    - { role: ansible-role-user, users: [ 'john_doe' ] }
-    - { role: ansible-role-user, users: [ 'jane_doe', 'max_doe' ], groupname: 'sysadmin', admin: true }
