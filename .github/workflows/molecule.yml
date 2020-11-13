@@ -1,5 +1,7 @@
 # Ansible Molecule workflow is triggered on push
 
+name: Ansible Molecule
+
 on:
   push:
     branches: 
