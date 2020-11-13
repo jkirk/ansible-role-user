@@ -1,0 +1,32 @@
+# Ansible Molecule workflow is triggered on push
+
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+  - cron: "42 3 * * 1-7"
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - image: "debian"
+            tag: "buster"
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: molecule
+        uses: robertdebock/molecule-action@2.6.3
+        with:
+          image: ${{ matrix.config.image }}
+          tag: ${{ matrix.config.tag }}
+          options: parallel
