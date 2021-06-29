@@ -19,7 +19,6 @@ Role Variables
 
 Use `group_vars/*` to deploy the users to specific host groups.
 
-
 ```yaml
 # The users you want to create.
 users: [ "jane_doe", "john_doe" ]
@@ -35,8 +34,11 @@ user_shell: '/bin/zsh'
 # groupname is mandatory when admin is true.
 groupname: 'sysadmin'
 
-# Setup passwordless sudo for the given groupname.
+# If `admin` is set to true passwordless sudo for the given groupname is set up
 admin: true
+
+# If `sudo_anyuser` is set to true sudo commands can be run as any user (via sudo -u)
+sudo_anyuser: false
 ```
 
 If you want to deploy the users on all hosts you can use `group_vars/all` or pass it as parameters to role (see example below).
