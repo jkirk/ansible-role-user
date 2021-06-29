@@ -1,4 +1,8 @@
 ---
 # defaults file for ansible-user
 
+# If `admin` is set to true passwordless sudo for the given groupname is set up
 admin: false
+
+# If `sudo_anyuser` is set to true sudo commands can be run as any user (via sudo -u)
+sudo_anyuser: false
