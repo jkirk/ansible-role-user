@@ -1,13 +1,14 @@
 ---
 galaxy_info:
-  role_name: user
   author: Darshaka Pathirana
   description: A simple ansible role to bootstrap user accounts with SSH key based logins and passwordless sudo.
   company: SynPro Solutions
+  role_name: user
+  namespace: synpro
 
   license: MIT
 
-  min_ansible_version: 1.2
+  min_ansible_version: '2.10'
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -26,9 +27,8 @@ galaxy_info:
   platforms:
     - name: "Debian"
       versions:
-        - "jessie"
-        - "stretch"
         - "buster"
+        - "bullseye"
 
   galaxy_tags: []
 

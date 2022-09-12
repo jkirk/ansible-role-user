@@ -1,3 +1,4 @@
 ---
 roles:
   - name: robertdebock.bootstrap
+    version: 5.2.12

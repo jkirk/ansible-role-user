@@ -10,8 +10,11 @@ lint: |
 driver:
   name: docker
 platforms:
-  - name: debian_10
-    image: debian:buster
+  - name: debian10
+    image: geerlingguy/docker-debian10-ansible
+    pre_build_image: true
+  - name: debian11
+    image: geerlingguy/docker-debian11-ansible
     pre_build_image: true
 provisioner:
   name: ansible
