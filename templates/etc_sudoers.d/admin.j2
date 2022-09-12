@@ -1,4 +1,4 @@
 # HEADER: managed by ansible, do NOT edit manually!
 {% for username in users %}
-{{ username }} ALL=NOPASSWD: ALL
+{{ username }} ALL={% if sudo_anyuser %}(ALL) {% endif %}NOPASSWD: ALL
 {% endfor %}
