@@ -1,6 +1,9 @@
 user
 ====
 
+[![Lint Code Base](https://github.com/jkirk/ansible-role-user/actions/workflows/linter.yml/badge.svg)](https://github.com/jkirk/ansible-role-user/actions/workflows/linter.yml)
+[![Ansible Molecule](https://github.com/jkirk/ansible-role-user/actions/workflows/molecule.yml/badge.svg)](https://github.com/jkirk/ansible-role-user/actions/workflows/molecule.yml)
+
 A simple ansible role to bootstrap user accounts with SSH public key based logins and passwordless sudo.
 
 For something more sophisticated use a different role, the ansible-galaxy role [robertdebock.users](https://galaxy.ansible.com/robertdebock/users) looks promising.
@@ -96,4 +99,4 @@ MIT
 Author Information
 ------------------
 
-Darshaka Pathirana - https://synpro.solutions
+Darshaka Pathirana - <https://synpro.solutions>
