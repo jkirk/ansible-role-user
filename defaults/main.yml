@@ -1,8 +1,20 @@
 ---
-# defaults file for ansible-user
+# The users you want to create.
+# users: [ "jane_doe", "john_doe" ]
+
+# Set the default shell for new and existing users.
+# If user_shell is omitted the default shell of existing users is not changed and
+# the default system shell is used for new users.
+# user_shell: '/bin/zsh'
+
+# Create additional user groups. The user you create will
+# automatically be a part of their user's group, ie. john_doe:john_doe.
+#
+# groupname is mandatory when admin is true.
+# groupname: 'sysadmin'
 
 # If `admin` is set to true passwordless sudo for the given groupname is set up
 admin: false
 
-# If `sudo_anyuser` is set to true sudo commands can be run as any user (via sudo -u)
+# If `sudo_anyuser` (and `admin`) is set to true sudo commands can be run as any user (via sudo -u)
 sudo_anyuser: false

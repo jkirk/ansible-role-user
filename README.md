@@ -22,27 +22,7 @@ Role Variables
 
 Use `group_vars/*` to deploy the users to specific host groups.
 
-```yaml
-# The users you want to create.
-users: [ "jane_doe", "john_doe" ]
-
-# Set the default shell for new and existing users.
-# If user_shell is omitted the default shell of existing users is not changed and
-# the default system shell is used for new users.
-user_shell: '/bin/zsh'
-
-# Create additional user groups. The user you create will
-# automatically be a part of their user's group, ie. john_doe:john_doe.
-#
-# groupname is mandatory when admin is true.
-groupname: 'sysadmin'
-
-# If `admin` is set to true passwordless sudo for the given groupname is set up
-admin: true
-
-# If `sudo_anyuser` is set to true sudo commands can be run as any user (via sudo -u)
-sudo_anyuser: false
-```
+See: [defaults/main.yml](https://github.com/jkirk/ansible-role-user/tree/master/defaults/main.yml)
 
 If you want to deploy the users on all hosts you can use `group_vars/all` or pass it as parameters to role (see example below).
 

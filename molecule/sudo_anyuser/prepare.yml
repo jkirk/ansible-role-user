@@ -1,0 +1,13 @@
+---
+- name: Prepare
+  hosts: all
+  become: yes
+  gather_facts: no
+
+  pre_tasks:
+    - name: Update apt
+      ansible.builtin.apt:
+        update_cache: yes
+
+  roles:
+    - role: robertdebock.bootstrap
