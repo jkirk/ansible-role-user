@@ -1,7 +1,15 @@
 ---
-
+# .ansible-lint
+# exclude_paths included in this file are parsed relative to this file's location
+# and not relative to the CWD of execution. CLI arguments passed to the --exclude
+# option will be parsed relative to the CWD of execution.
 exclude_paths:
   - .cache/ # implicit unless exclude_paths is defined in config
-  - .git/
   - .github/
-  - venv
+  - .git/
+  - roles/
+  - roles-generic/
+  - venv/
+# parseable: true
+# quiet: true
+# verbosity: 1
