@@ -28,16 +28,16 @@ jobs:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
- 
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9.2' # Python version in Debian/bullseye
- 
+
       - uses: syphar/restore-virtualenv@v1 # run this instead make install + source venv/bin/activate
         id: cache-virtualenv
         with:
           requirement_files: requirements.txt
- 
+
       - uses: syphar/restore-pip-download-cache@v1
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
       - run: pip install pip setuptools wheel --upgrade
@@ -46,15 +46,15 @@ jobs:
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
       - run: pip install -r requirements.txt --upgrade
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
- 
+
       # Check ansible version
       - run: ansible --version
- 
+
       # Check molecule version
       - run: molecule --version
- 
+
       # Create ansible.cfg with correct roles_path
       - run: printf '[defaults]\nroles_path=../' >ansible.cfg
- 
+
       # Run molecule test
       - run: molecule test

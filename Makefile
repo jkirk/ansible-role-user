@@ -43,4 +43,3 @@ run: ## Quick How-To
 	@echo "molecule test"
 	@echo
 	@echo "Read: https://molecule.readthedocs.io/en/stable/getting-started.html"
-
