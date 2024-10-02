@@ -2,10 +2,18 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include ansible-role-user"
+    - name: "Deploy admin user sysadmin in sysadmin group"
       ansible.builtin.include_role:
         name: "ansible-role-user"
       vars:
         users: [ 'sysadmin' ]
         groupname: 'sysadmin'
+        admin: True
+    - name: "Deploy admin user sysadmin in sysadmin group + additional groups 'adm' + 'mygroup1'"
+      ansible.builtin.include_role:
+        name: "ansible-role-user"
+      vars:
+        users: [ 'sysadmin' ]
+        groupname: 'sysadmin'
+        user_groups: [ 'adm', 'mygroup1' ]
         admin: True
