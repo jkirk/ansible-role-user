@@ -1,5 +1,10 @@
 ---
 
 - name: "Install authorized_keys file for user {{ item }}"
-  ansible.builtin.copy: src=ssh/{{ item }}.pub dest=/home/{{ item }}/.ssh/authorized_keys owner={{ item }} group={{ item }} mode=0644
+  ansible.builtin.copy:
+    src: "ssh/{{ item }}.pub"
+    dest: "/home/{{ item }}/.ssh/authorized_keys"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0644
   with_items: "{{ users }}"

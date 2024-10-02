@@ -1,11 +1,39 @@
 ---
 
-- name: "Create user group {{ item }}"
-  ansible.builtin.group: name={{ item }} state=present
-- name: "Create user account for {{ item }}"
-  ansible.builtin.user: name={{ item }} group={{ item }}
-- name: "Set shell for user {{ item }}"
-  ansible.builtin.user: name={{ item }} shell={{ user_shell }}
+- name: "Create primary group {{ groupname }}"
+  ansible.builtin.group:
+    name: "{{ groupname }}"
+    state: present
+
+- name: "Create additional groups {{ user_groups }}"
+  ansible.builtin.group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ user_groups }}"
+  when: user_groups is defined
+
+- name: "Create user account for {{ user_item }}"
+  ansible.builtin.user:
+    name: "{{ user_item }}"
+    group: "{{ groupname }}"
+
+- name: "Put users in groups {{ user_groups }}"
+  ansible.builtin.user:
+    name: "{{ user_item }}"
+    groups: "{{ user_groups }}"
+    append: yes
+  when: user_groups is defined
+
+- name: "Set shell for user {{ user_item }}"
+  ansible.builtin.user:
+    name: "{{ user_item }}"
+    shell: "{{ user_shell }}"
   when: user_shell is defined
-- name: "Create directory ssh directory for user {{ item }}"
-  ansible.builtin.file: path=/home/{{ item }}/.ssh state=directory owner={{ item }} group={{ item }} mode=0700
+
+- name: "Create directory ssh directory for user {{ user_item }}"
+  ansible.builtin.file:
+    path: "/home/{{ user_item }}/.ssh"
+    state: directory
+    owner: "{{ user_item }}"
+    group: "{{ groupname }}"
+    mode: 0700

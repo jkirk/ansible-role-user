@@ -1,17 +1,21 @@
 ---
-# The users you want to create.
+# The users you want to create (mandatory).
 # users: [ "jane_doe", "john_doe" ]
 
-# Set the default shell for new and existing users.
+# Create primary user group (mandatory).
+# We do not use a user group (ie. john_doe:john_doe) anymore.
+# Instead, the user will be a part of this primary user group.
+#
+# groupname: 'sysadmin'
+
+# Put users into additional groups (optional).
+# If the additional groups do not exist, the groups are created.
+# user_groups: [ "adm', 'mygroup' ]
+
+# Set the default shell for new and existing users (optional).
 # If user_shell is omitted the default shell of existing users is not changed and
 # the default system shell is used for new users.
 # user_shell: '/bin/zsh'
-
-# Create additional user groups. The user you create will
-# automatically be a part of their user's group, ie. john_doe:john_doe.
-#
-# groupname is mandatory when admin is true.
-# groupname: 'sysadmin'
 
 # If `admin` is set to true passwordless sudo for the given groupname is set up
 admin: false

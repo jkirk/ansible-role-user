@@ -1,5 +1,10 @@
 ---
 
 - name: "Install sudoers file for group {{ groupname }}"
-  ansible.builtin.template: src=templates/etc_sudoers.d/admin.j2 dest=/etc/sudoers.d/{{ groupname }} owner=root group=root mode=0440
+  ansible.builtin.template:
+    src: templates/etc_sudoers.d/admin.j2
+    dest: "/etc/sudoers.d/{{ groupname }}"
+    owner: root
+    group: root
+    mode: 0440
   when: admin
