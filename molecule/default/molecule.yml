@@ -3,18 +3,11 @@ dependency:
   name: galaxy
   options:
     role-file: requirements.yml
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
 driver:
-  name: docker
+  name: podman
 platforms:
-  - name: debian10
-    image: geerlingguy/docker-debian10-ansible
-    pre_build_image: true
-  - name: debian11
-    image: geerlingguy/docker-debian11-ansible
+  - name: instance
+    image: docker.io/geerlingguy/docker-${MOLECULE_DISTRO:-debian12}-ansible:latest
     pre_build_image: true
 provisioner:
   name: ansible

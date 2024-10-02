@@ -1,4 +1,2 @@
-ansible
-ansible-lint
-molecule[docker,lint]
-yamllint
+molecule
+molecule-plugins[podman]

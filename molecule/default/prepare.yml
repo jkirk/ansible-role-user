@@ -8,6 +8,3 @@
     - name: Update apt
       ansible.builtin.apt:
         update_cache: yes
-
-  roles:
-    - role: robertdebock.bootstrap

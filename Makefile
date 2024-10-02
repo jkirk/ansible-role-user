@@ -42,4 +42,4 @@ run: ## Quick How-To
 	@echo "Run a full test sequence:"
 	@echo "molecule test"
 	@echo
-	@echo "Read: https://molecule.readthedocs.io/en/stable/getting-started.html"
+	@echo "Read: https://ansible.readthedocs.io/projects/molecule/getting-started/"
