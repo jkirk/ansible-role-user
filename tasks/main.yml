@@ -23,7 +23,5 @@
   loop: "{{ users | flatten(levels=1) }}"
   loop_control:
     loop_var: user_item
-- name: Include install_authorized_keys.yml
-  ansible.builtin.import_tasks: install_authorized_keys.yml
 - name: Include create_sudoers.yml
   ansible.builtin.import_tasks: create_sudoers.yml

@@ -37,3 +37,11 @@
     owner: "{{ user_item }}"
     group: "{{ groupname }}"
     mode: 0700
+
+- name: "Install authorized_keys file for user {{ user_item }}"
+  ansible.builtin.copy:
+    src: "ssh/{{ user_item }}.pub"
+    dest: "/home/{{ user_item }}/.ssh/authorized_keys"
+    owner: "{{ user_item }}"
+    group: "{{ groupname }}"
+    mode: 0644
