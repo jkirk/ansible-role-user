@@ -1,5 +1,4 @@
 ---
-
 - name: "Create primary group {{ groupname }}"
   ansible.builtin.group:
     name: "{{ groupname }}"

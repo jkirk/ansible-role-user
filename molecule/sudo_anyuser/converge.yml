@@ -6,7 +6,7 @@
       ansible.builtin.include_role:
         name: "ansible-role-user"
       vars:
-        users: [ 'sysadmin' ]
-        groupname: 'sysadmin'
+        users: ["sysadmin"]
+        groupname: "sysadmin"
         admin: true
         sudo_anyuser: true

@@ -1,5 +1,4 @@
 ---
-
 - name: "Install sudoers file for group {{ groupname }}"
   ansible.builtin.template:
     src: templates/etc_sudoers.d/admin.j2
