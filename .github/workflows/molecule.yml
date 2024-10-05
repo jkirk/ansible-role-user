@@ -3,12 +3,14 @@
 name: Ansible Molecule
 
 # Run this workflow every time a new commit pushed to the repository
+# and on a pull request against master
 on:
   push:
   pull_request:
     branches:
       - master
-      - main
+
+permissions: {}
 
 jobs:
   molecule:
@@ -17,35 +19,29 @@ jobs:
     # Set the agent to run on
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5.2.0
         with:
-          python-version: '3.9.2' # Python version in Debian/bullseye
-
-      - uses: syphar/restore-virtualenv@v1 # run this instead make install + source venv/bin/activate
-        id: cache-virtualenv
-        with:
-          requirement_files: requirements.txt
-
-      - uses: syphar/restore-pip-download-cache@v1
-        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
-      - run: pip install pip setuptools wheel --upgrade
-        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+          python-version: "3.11.2" # Python version in Debian/bookworm
+          cahe: "pip" # caching pip dependencies
       - run: pip install -r requirements.txt
-        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
-      - run: pip install -r requirements.txt --upgrade
-        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
 
       # Check ansible version
       - run: ansible --version
