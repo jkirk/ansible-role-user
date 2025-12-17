@@ -4,7 +4,7 @@ galaxy_info:
   description: A simple ansible role to bootstrap user accounts with SSH key based logins and passwordless sudo.
   company: SynPro Solutions
   role_name: user
-  namespace: synpro
+  namespace: jkirk
 
   license: MIT
 
@@ -29,6 +29,7 @@ galaxy_info:
       versions:
         - "buster"
         - "bullseye"
+        - "bookworm"
 
   galaxy_tags: []
 

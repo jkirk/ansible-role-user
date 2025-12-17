@@ -4,7 +4,7 @@
   tasks:
     - name: "Deploy admin user sysadmin in sysadmin group"
       ansible.builtin.include_role:
-        name: "ansible-role-user"
+        name: jkirk.user
       vars:
         users: ["sysadmin"]
         groupname: "admin"
