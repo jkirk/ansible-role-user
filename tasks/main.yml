@@ -11,17 +11,14 @@
 #   vars:
 #     users: [ 'username1', 'username2' ]
 #     groupname: mygroup
-#     groups: [ 'mygroup1', 'mygroup2' ]
 #     admin: true
 #
 # The usernames are given by a list and the groupname is set. The variable
 # 'admin' defines if the group has sudoers rights.
 #
 
-- name: Include create_user.yml
-  ansible.builtin.include_tasks: create_user.yml
-  loop: "{{ users | flatten(levels=1) }}"
-  loop_control:
-    loop_var: user_item
-- name: Include create_sudoers.yml
-  ansible.builtin.import_tasks: create_sudoers.yml
+- include_tasks: create_user.yml
+  with_items: "{{ users }}"
+- import_tasks: create_group.yml
+  when: groupname is defined
+- import_tasks: create_sudoers.yml

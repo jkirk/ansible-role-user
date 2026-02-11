@@ -9,6 +9,7 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
   - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v24.9.2
+    rev: v25.12.1
     hooks:
       - id: ansible-lint
+        language_version: python3.11

@@ -1,0 +1,7 @@
+---
+
+- name: "Create group {{ groupname }}"
+  ansible.builtin.group: name={{ groupname }} state=present
+- name: "Put users in group {{ groupname }}"
+  ansible.builtin.user: name={{ item }} groups={{ groupname }} append=yes
+  with_items: "{{ users }}"
