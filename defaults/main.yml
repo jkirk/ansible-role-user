@@ -7,13 +7,23 @@
 # the default system shell is used for new users.
 # user_shell: '/bin/zsh'
 
-# Create additional user groups. The user you create will
-# automatically be a part of their user's group, ie. john_doe:john_doe.
+# A user will automatically be a part of their user's group, ie. john_doe:john_doe.
+#
+# Create an additional "admin" user group.
 #
 # groupname is mandatory when admin is true.
 # groupname: 'sysadmin'
+#
+# Put users into additional / specific groups (optional).
+# If the additional groups do not exist, the groups are created.
+# user_groups: [ "adm', 'mygroup' ]
+#
+# The user will only be added to the groups specified in user_groups and
+# groupname, removing them from all other groups.  If the variable is set to
+# `user_groups_append: true` the user is added to given groups.
+user_groups_append: false
 
-# If `admin` is set to true passwordless sudo for the given groupname is set up
+# If `admin` is set to true, passwordless sudo for the given groupname is set up
 admin: false
 
 # If `sudo_anyuser` (and `admin`) is set to true sudo commands can be run as any user (via sudo -u)
