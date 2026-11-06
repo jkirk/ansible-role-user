@@ -32,7 +32,7 @@ jobs:
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
@@ -40,7 +40,7 @@ jobs:
 
       # Runs the Super-Linter action
       - name: Super-linter
-        uses: super-linter/super-linter@v7.1.0
+        uses: super-linter/super-linter@v8.7.0
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
