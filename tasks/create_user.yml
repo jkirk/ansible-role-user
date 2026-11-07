@@ -1,17 +1,32 @@
 ---
 - name: "Create user group {{ item }}"
-  ansible.builtin.group: name={{ item }} state=present
+  ansible.builtin.group:
+    name: "{{ item }}"
+    state: present
+
 - name: "Create user account for {{ item }}"
-  ansible.builtin.user: name={{ item }} group={{ item }}
+  ansible.builtin.user:
+    name: "{{ item }}"
+    group: "{{ item }}"
+
 - name: "Set shell for user {{ item }}"
-  ansible.builtin.user: name={{ item }} shell={{ user_shell }}
+  ansible.builtin.user:
+    name: "{{ item }}"
+    shell: "{{ user_shell }}"
   when: user_shell is defined
+
 - name: "Create directory ssh directory for user {{ item }}"
-  ansible.builtin.file: path=/home/{{ item }}/.ssh state=directory owner={{ item }} group={{ item }} mode=0700
+  ansible.builtin.file:
+    path: /home/{{ item }}/.ssh
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0700"
+
 - name: "Install authorized_keys file for user {{ item }}"
   ansible.builtin.copy:
     src: "ssh/{{ item }}.pub"
     dest: "/home/{{ item }}/.ssh/authorized_keys"
     owner: "{{ item }}"
     group: "{{ item }}"
-    mode: 0644
+    mode: "0644"

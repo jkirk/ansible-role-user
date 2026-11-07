@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Ansible role jkirk.user with user_groups"
+      ansible.builtin.include_role:
+        name: jkirk.user
+      vars:
+        users: ["johndoe"]
+        groupname: "sysadmin"
+        user_groups: ["adm"]
+        admin: true
+        sudo_anyuser: true

@@ -27,21 +27,20 @@ jobs:
       statuses: write
 
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803  # v6
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+          persist-credentials: false
 
       # Runs the Super-Linter action
       - name: Super-linter
-        uses: super-linter/super-linter@v7.1.0
+        uses: super-linter/super-linter/slim@2da136927bd4a73596db63044b504547c62cb854  # v9.0.0
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FIX_MARKDOWN_PRETTIER: false
+          VALIDATE_BIOME_FORMAT: false
+          VALIDATE_YAML_PRETTIER: false
