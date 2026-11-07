@@ -17,8 +17,8 @@
 # 'admin' defines if the group has sudoers rights.
 #
 
-- include_tasks: create_user.yml
+- ansible.builtin.include_tasks: create_user.yml
   with_items: "{{ users }}"
-- import_tasks: create_group.yml
+- ansible.builtin.import_tasks: create_group.yml
   when: groupname is defined
-- import_tasks: create_sudoers.yml
+- ansible.builtin.import_tasks: create_sudoers.yml

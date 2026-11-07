@@ -8,4 +8,4 @@
       vars:
         users: ["sysadmin"]
         groupname: "admin"
-        admin: True
+        admin: true
