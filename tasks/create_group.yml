@@ -6,7 +6,7 @@
     state: present
   when: groupname is defined
 
-- name: "Create additional groups {{ user_groups }}"
+- name: "Create additional groups"
   ansible.builtin.group:
     name: "{{ item }}"
     state: present
@@ -21,7 +21,7 @@
   with_items: "{{ users }}"
   when: groupname is defined
 
-- name: "Put user in additional groups {{ user_groups }}"
+- name: "Put user in additional groups"
   ansible.builtin.user:
     name: "{{ item }}"
     groups: "{{ user_groups + [groupname] }}"
