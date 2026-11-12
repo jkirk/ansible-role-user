@@ -1,3 +1,0 @@
-{
-  "ignore": [".github/workflows/linter.yml", ".github/workflows/molecule.yml"]
-}

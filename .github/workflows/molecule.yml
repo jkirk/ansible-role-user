@@ -1,22 +1,22 @@
-# Ansible Molecule workflow is triggered on push
-
+---
 name: Ansible Molecule Workflow
 
 # Run this workflow every time a new commit pushed to the repository
-# and on a pull request against master
+# and on a pull request against master and main
+# and once week (Thursday)
 on:
   push:
   pull_request:
-    branches:
-      - master
+    branches: [master, main]
+  schedule:
+    - cron: "42 3 * * 4"
 
 permissions: {}
 
+
 jobs:
   molecule:
-    # Name the Job
     name: Ansible Molecule
-    # Set the agent to run on
     runs-on: ubuntu-24.04
 
     strategy:
@@ -24,13 +24,13 @@ jobs:
         control: [bookworm, trixie, podman]
         include:
           - control: bookworm
-            python_version: '3.11.2'
+            python_version: "3.11.2"
             ansible_core: "2.14.18"
           - control: trixie
-            python_version: '3.13.3'
+            python_version: "3.13.5"
             ansible_core: "2.19.4"
           - control: podman
-            python_version: '3.11.2'
+            python_version: "3.11.2"
             ansible_core: "2.14.18"
         target_distro:
           - debian11
@@ -45,7 +45,7 @@ jobs:
 
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
-      - name: Check out code
+      - name: Checkout code
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803  # v6
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
